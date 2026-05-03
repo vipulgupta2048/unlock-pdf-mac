@@ -136,13 +136,30 @@ for f in "$@"; do
   fi
   rm -f "$out"
 
-  pw=$(osascript -e "display dialog \"Password for $base.pdf:\" default answer \"\" with hidden answer buttons {\"Cancel\", \"Unlock\"} default button \"Unlock\"" -e "text returned of result" 2&gt;/dev/null) || continue
+  attempts=0
+  while [ $attempts -lt 5 ]; do
+    attempts=$((attempts + 1))
+    if [ $attempts -eq 1 ]; then
+      prompt="Enter password to unlock $base.pdf"
+    else
+      prompt="Incorrect password. Try again — $base.pdf"
+    fi
 
-  err=$(qpdf --warning-exit-0 --password="$pw" --decrypt "$f" "$out" 2&gt;&amp;1) &amp;&amp; continue
-  rm -f "$out"
+    pw=$(osascript -e "display dialog \"$prompt\" default answer \"\" with hidden answer buttons {\"Cancel\", \"Unlock\"} default button \"Unlock\"" -e "text returned of result" 2&gt;/dev/null) || break
 
-  msg=$(printf '%s' "$err" | head -2 | sed 's/"/\\"/g; s/\\/\\\\/g')
-  osascript -e "display dialog \"Could not unlock $base.pdf.\n\nqpdf says:\n$msg\n\nTry the CLI to see full output:\nbash ~/work/unlock-pdf-mac/scripts/unlock-pdf.sh '$f'\" buttons {\"OK\"} default button 1 with icon caution" &gt;/dev/null 2&gt;&amp;1
+    if err=$(qpdf --warning-exit-0 --password="$pw" --decrypt "$f" "$out" 2&gt;&amp;1); then
+      break
+    fi
+    rm -f "$out"
+
+    if printf '%s' "$err" | grep -qi "invalid password"; then
+      continue
+    fi
+
+    reason=$(printf '%s' "$err" | tail -1 | sed -E 's|^qpdf: [^:]*: *||' | sed 's/"/\\"/g')
+    osascript -e "display dialog \"Could not unlock $base.pdf\n\n$reason\" buttons {\"OK\"} default button 1 with icon caution" &gt;/dev/null 2&gt;&amp;1
+    break
+  done
 done</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
