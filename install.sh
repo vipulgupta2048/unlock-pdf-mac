@@ -120,7 +120,18 @@ for f in "$@"; do
   dir=$(dirname "$f")
   base=$(basename "$f" .pdf)
   out="$dir/$base-unlocked.pdf"
-  qpdf --decrypt "$f" "$out" 2>/dev/null || osascript -e "display dialog \"Could not unlock: $base.pdf\nIt may require a password — open Terminal and run:\nqpdf --decrypt --password=YOURPASS '$f' '$out'\" buttons {\"OK\"} default button 1 with icon caution"
+
+  if qpdf --decrypt "$f" "$out" 2>/dev/null; then
+    continue
+  fi
+
+  pw=$(osascript -e "display dialog \"Password for $base.pdf:\" default answer \"\" with hidden answer buttons {\"Cancel\", \"Unlock\"} default button \"Unlock\"" -e "text returned of result" 2>/dev/null) || continue
+
+  if qpdf --password="$pw" --decrypt "$f" "$out" 2>/dev/null; then
+    continue
+  fi
+
+  osascript -e "display dialog \"Could not unlock $base.pdf — wrong password or unsupported encryption.\" buttons {\"OK\"} default button 1 with icon caution" >/dev/null 2>&1
 done</string>
           <key>CheckedForUserDefaultShell</key>
           <true/>

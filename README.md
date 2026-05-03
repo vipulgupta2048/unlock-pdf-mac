@@ -172,10 +172,16 @@ PRs welcome. Things on the roadmap:
 - [`qpdf`](https://github.com/qpdf/qpdf) by Jay Berkenbilt — the engine that does all the actual work
 - macOS Automator — the delivery mechanism
 
+## Author
+
+Built by [**Vipul Gupta**](https://x.com/vipulgupta2048) — find me on X for feedback, requests, or to say hi.
+
 ---
 
 <div align="center">
 
 **If this saved you a trip to a sketchy PDF-unlocker website, consider starring the repo.**
+
+[Follow on X](https://x.com/vipulgupta2048) · [Report an issue](https://github.com/vipulgupta2048/unlock-pdf-mac/issues)
 
 </div>
