@@ -21,15 +21,16 @@ for input in "$@"; do
   base=$(basename "$input" .pdf)
   output="$dir/$base-unlocked.pdf"
 
-  if qpdf --decrypt "$input" "$output" 2>/dev/null; then
+  if qpdf --warning-exit-0 --decrypt "$input" "$output" 2>/dev/null; then
     echo "Unlocked: $output"
   else
     read -r -s -p "Password for $(basename "$input"): " password
     echo
-    if qpdf --password="$password" --decrypt "$input" "$output"; then
+    if qpdf --warning-exit-0 --password="$password" --decrypt "$input" "$output"; then
       echo "Unlocked: $output"
     else
       echo "Failed to unlock: $input" >&2
+      rm -f "$output"
     fi
   fi
 done
