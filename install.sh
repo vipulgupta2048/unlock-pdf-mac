@@ -142,7 +142,7 @@ for f in "$@"; do
     if [ $attempts -eq 1 ]; then
       prompt="Enter password to unlock $base.pdf"
     else
-      prompt="Incorrect password. Try again — $base.pdf"
+      prompt="Incorrect password. Try again - $base.pdf"
     fi
 
     pw=$(osascript -e "display dialog \"$prompt\" default answer \"\" with hidden answer buttons {\"Cancel\", \"Unlock\"} default button \"Unlock\"" -e "text returned of result" 2&gt;/dev/null) || break

@@ -4,7 +4,7 @@
 
 **Right-click any password-protected PDF in Finder and unlock it instantly.**
 
-Adds a native **Unlock PDF** option to the macOS context menu — no apps to open, no online uploads, no subscriptions.
+Adds a native **Unlock PDF** option to the macOS context menu - no apps to open, no online uploads, no subscriptions.
 
 <img src="assets/unlock-pdf-menu.png" alt="Unlock PDF context menu in macOS Finder" width="420">
 
@@ -19,17 +19,17 @@ Adds a native **Unlock PDF** option to the macOS context menu — no apps to ope
 
 ## Why this exists
 
-You have a PDF you own — a bank statement, a scanned form, a manual — and you cannot copy text from it, print it, or merge it with another PDF because it's locked. Online "PDF unlocker" sites want you to upload private documents to a stranger's server. Desktop apps want $30 and a subscription.
+You have a PDF you own - a bank statement, a scanned form, a manual - and you cannot copy text from it, print it, or merge it with another PDF because it's locked. Online "PDF unlocker" sites want you to upload private documents to a stranger's server. Desktop apps want $30 and a subscription.
 
 This repo is a **30-second install**, **zero-cloud**, **fully-local** tool that drops an `Unlock PDF` button into your right-click menu. Pick a PDF, click, get an unlocked copy next to the original. Done.
 
 ## Features
 
-- **Right-click in Finder** — no terminal needed after install
-- **Batch support** — select multiple PDFs, unlock all in one click
-- **Local & private** — your files never leave your Mac
-- **Non-destructive** — original is preserved; output is `<filename>-unlocked.pdf`
-- **Tiny** — one shell script, one Automator Quick Action, no daemons
+- **Right-click in Finder** - no terminal needed after install
+- **Batch support** - select multiple PDFs, unlock all in one click
+- **Local & private** - your files never leave your Mac
+- **Non-destructive** - original is preserved; output is `<filename>-unlocked.pdf`
+- **Tiny** - one shell script, one Automator Quick Action, no daemons
 
 ## Install
 
@@ -63,7 +63,7 @@ Select several PDFs, right-click, **Unlock PDF**. Each one gets its own unlocked
 
 | PDF type | What it means | Works? |
 |---|---|---|
-| **Owner-locked** (no password to open, but copy/print disabled) | The most common annoyance — bank statements, manuals | Yes, automatic |
+| **Owner-locked** (no password to open, but copy/print disabled) | The most common annoyance - bank statements, manuals | Yes, automatic |
 | **User-locked** (password required to open) | You'll be prompted for the password | Yes |
 
 ## How it works
@@ -124,7 +124,7 @@ Removing restrictions from PDFs you legally own and have the right to access is 
 <details>
 <summary><b>Does this break encryption / crack passwords?</b></summary>
 
-No. `qpdf --decrypt` removes restrictions from PDFs that have an *owner password* but no *user password* (the most common case). For PDFs that require a password to open, you'll be prompted to enter it — this tool does not crack or guess passwords.
+No. `qpdf --decrypt` removes restrictions from PDFs that have an *owner password* but no *user password* (the most common case). For PDFs that require a password to open, you'll be prompted to enter it - this tool does not crack or guess passwords.
 </details>
 
 <details>
@@ -137,7 +137,7 @@ Newer macOS versions group third-party services under **Quick Actions** in the r
 <summary><b>The Quick Action doesn't appear after install.</b></summary>
 
 1. Restart Finder: `killall Finder`
-2. Check `~/Library/Services/` — `Unlock PDF.workflow` should be there
+2. Check `~/Library/Services/` - `Unlock PDF.workflow` should be there
 3. Open **System Settings → Privacy & Security → Extensions → Finder** and toggle **Unlock PDF** on
 
 </details>
@@ -145,7 +145,7 @@ Newer macOS versions group third-party services under **Quick Actions** in the r
 <details>
 <summary><b>Can I change the output filename pattern?</b></summary>
 
-Yes — edit `scripts/unlock-pdf.sh` and adjust the line that builds the output path. Default is `${name}-unlocked.pdf`.
+Yes - edit `scripts/unlock-pdf.sh` and adjust the line that builds the output path. Default is `${name}-unlocked.pdf`.
 </details>
 
 <details>
@@ -165,16 +165,16 @@ PRs welcome. Things on the roadmap:
 
 ## License
 
-[MIT](LICENSE) — do whatever you want with this.
+[MIT](LICENSE) - do whatever you want with this.
 
 ## Credits
 
-- [`qpdf`](https://github.com/qpdf/qpdf) by Jay Berkenbilt — the engine that does all the actual work
-- macOS Automator — the delivery mechanism
+- [`qpdf`](https://github.com/qpdf/qpdf) by Jay Berkenbilt - the engine that does all the actual work
+- macOS Automator - the delivery mechanism
 
 ## Author
 
-Built by [**Vipul Gupta**](https://x.com/vipulgupta2048) — find me on X for feedback, requests, or to say hi.
+Built by [**Vipul Gupta**](https://x.com/vipulgupta2048) - find me on X for feedback, requests, or to say hi.
 
 ---
 
