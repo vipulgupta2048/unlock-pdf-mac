@@ -6,6 +6,8 @@
 
 Adds a native **Unlock PDF** option to the macOS context menu - no apps to open, no online uploads, no subscriptions.
 
+https://github.com/vipulgupta2048/unlock-pdf-mac/raw/main/assets/demo.mp4
+
 <img src="assets/unlock-pdf-menu.png" alt="Unlock PDF context menu in macOS Finder" width="420">
 
 [![Platform](https://img.shields.io/badge/platform-macOS%2012%2B-black?logo=apple)](https://www.apple.com/macos/)
